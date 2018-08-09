@@ -5,12 +5,14 @@ public class ATMMachine {
     private State atmOutOfMoney;
     private State atmState;
     private State actionState;
-
-    static int atmAmount = 2000;
+    private BankNotes bankNotes;
+    private static int atmAmount = 0;
 
     private final static AtmDisplayMenu atmDisplayMenu = new AtmDisplayMenu();
 
-    public ATMMachine() {
+    public ATMMachine(BankNotes bankNotes) {
+        this.bankNotes = bankNotes;
+        this.setAtmAmount(bankNotes.getFiftyEuroNotesAmount() + bankNotes.getTwentyEuroNotesAmount());
         atmOutOfMoney = new NoMoney(this);
 
         if (atmAmount <= 0) {
@@ -47,4 +49,7 @@ public class ATMMachine {
         return atmAmount;
     }
 
+    public BankNotes getBankNotes() {
+        return bankNotes;
+    }
 }
